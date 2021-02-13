@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="base" content="width=device-width, initial-scale=1.0">
+    {% block header_change %}
+    {% endblock %}
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="{% static 'css/bootstrap/css/bootstrap.css' %}">
+<link rel="stylesheet" href="{% static 'css/google/iconfont/material-icons.css' %}">
+<link rel="stylesheet" href="{% static 'css/fa/css/all.css' %}">
+  <title>{% block title %}Smart Gate{% endblock %}</title>
+</head>
+<body>
+    <div style="text-align: center">
+      <header class="container center-allign">
+          <h1>
+            <a href="{% url 'home' %}" >Smart Gate</a>
+          </h1>
+      </header>
+    </div>
+  <main>
+     <header class="container center-allign">
+     </header>
+      {% block content %}
+      {% endblock %}
+  </main>
+</body>
+</html>

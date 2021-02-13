@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block header_change %}
+    <meta name="vapid-key" content="{{ vapid_key }}">
+    {% if user.id %}
+      <meta name="user_id" content="{{ user.id }}">
+    {% endif %}
+{% endblock %}
+{% block title %}Smart Gate{% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+    <div class="container" style="text-align: right">
+
+          <a href="{% url 'admin:index' %}" class="btn btn-secondary btn-sm"> <span class="fa fa-cog"></span> Admin</a>
+          <a href="{% url 'logout' %}" class="btn btn-secondary btn-sm"> <span class="fa fa-sign-out-alt"></span> Log out </a>
+    </div>
+    <div class="container" style="text-align: center">
+        <div class="btn-group" role="group" style="text-align: right">
+            {%if running%}
+                <a href="{% url 'LiveView:stop' %}" class="btn btn-danger" role="button"><span class="material-icons" title="Stop face recognition">power_settings_new</span></a>
+            {% else %}
+                <a href="{% url 'LiveView:start' %}" class="btn btn-success" role="button"><span class="material-icons" title="Start face recognition">power_settings_new</span></a>
+            {%endif%}
+            <a href="{% url 'LiveView:stream' %}" class="btn btn-primary"> <span class="material-icons" title="Open video stream">ondemand_video</span></a>
+            <a href="{% url 'LiveView:open' %}" class="btn btn-warning"> <span class="material-icons" title="Open gate">lock_open</span></a>
+            {% if subscription %}
+                <a href="{% url 'unsubscribe' %}" class="btn btn-info"> <span class="material-icons" title="Unsubscribe from ring notifications">notifications</span></a>
+            {% else %}
+                <a href="{% url 'subscribe' %}" class="btn btn-info"> <span class="material-icons" title="Subscribe to ring notifications">notifications_off</span></a>
+            {% endif %}
+        </div>
+    </div>
+    {%block liveview%}
+    {% endblock %}
+
+
+<script src="{% static '/js/registerSw.js' %}"></script>
+<script src="{% static '/js/site.js' %}"></script>
+{% else %}
+    <div class="container" style="text-align: center">
+	  <a href="{% url 'admin:index' %}" class="btn btn-primary btn-lg"> <span class="fa fa-cog"></span> Admin</a>
+	  <a href="{% url 'login' %}" class="btn btn-primary btn-lg"> <span class="fa fa-sign-in-alt"></span> Log in </a>
+    </div>
+{% endif %}
+
+{% endblock %}

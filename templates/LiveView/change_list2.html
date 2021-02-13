@@ -1,0 +1,9 @@
+{% extends 'admin/change_list.html' %}
+
+{% block object-tools %}
+<div style="float:right;" class="object-tools">
+    <a style="margin:0 0 0;" href="load/" class="button">Load files</a>
+    <a style="margin:0 10px 0;" href="grab/" class="button">Reconnect cam</a>
+</div>
+{{ block.super }}
+{% endblock %}

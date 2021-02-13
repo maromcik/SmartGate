@@ -1,0 +1,22 @@
+{% extends 'home.html' %}
+
+{% block liveview %}
+<br>
+<div class="container" style="text-align: center">
+    {% if status == 0 %}
+    <div class="alert alert-success" role="alert">
+      {{message}}
+    </div>
+    {% elif status == 1 %}
+    <div class="alert alert-warning" role="alert">
+      {{message}}
+    </div>
+    {% elif status == 2 %}
+    <div class="alert alert-danger" role="alert">
+      {{message}}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+
